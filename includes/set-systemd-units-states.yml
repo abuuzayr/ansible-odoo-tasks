@@ -1,0 +1,9 @@
+---
+
+- name: 'set units states: {{ units_states }}'
+  become: true
+  systemd:
+    name: '{{ item.unit }}'
+    state: '{{ item.state }}'
+    daemon_reload: yes
+  with_items: '{{ units_states }}'

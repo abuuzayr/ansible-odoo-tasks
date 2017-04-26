@@ -1,0 +1,11 @@
+---
+
+- name: 'generate docker env files: {{ docker_services }}'
+  become: true
+  template:
+    src: '{{ item.name }}.env.j2'
+    dest: '/{{ docker_env_dir }}/{{ item.name }}{% if item.profile is defined and item.profile %}.{{ item.profile }}{% endif %}.env'
+    owner: root
+    group: root
+    mode: 0600
+  with_items: '{{ docker_services }}'

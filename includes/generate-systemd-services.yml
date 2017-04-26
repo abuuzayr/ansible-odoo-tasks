@@ -1,0 +1,14 @@
+---
+
+- name: 'generate systemd services: {{ services }}'
+  become: true
+  template:
+    src: '{{ item.name }}.service.j2'
+    dest: '/{{ systemd_units_dir }}/{{ item.name }}{% if item.profile is defined and item.profile %}.{{ item.profile }}{% endif %}.service'
+    owner: root
+    group: root
+    mode: 0644
+  with_items: '{{ services }}'
+  notify:
+    - reload systemd
+

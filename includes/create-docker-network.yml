@@ -1,0 +1,12 @@
+---
+
+- name: 'check if network exists: {{ network }}'
+  become: true
+  command: 'docker network inspect {{ network }}'
+  register: network_exists
+  failed_when: false
+
+- name: 'create network: {{ network }}'
+  become: true
+  command: 'docker network create {{ network }}'
+  when: network_exists|failed

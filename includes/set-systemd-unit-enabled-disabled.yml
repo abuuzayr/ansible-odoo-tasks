@@ -1,0 +1,8 @@
+---
+
+- name: 'systemd_unit={{ unit }} enabled={{ enabled }}'
+  become: true
+  systemd:
+    name: '{{ unit }}'
+    daemon_reload: yes
+    enabled: '{{ enabled }}'

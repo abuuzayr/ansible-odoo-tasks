@@ -1,0 +1,7 @@
+---
+
+- include: 'tasks/includes/create-docker-network.yml'
+  become: true
+  vars:
+    network: '{{ item }}'
+  with_items: '{{ networks }}'

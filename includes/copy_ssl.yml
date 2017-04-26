@@ -1,0 +1,13 @@
+---
+- name: 'copy ssl certificates and keys: {{ ssl_domain }}'
+  become: true
+  copy:
+    src: '{{ ssl_domain }}.{{ item }}'
+    dest: '/{{ ssl_certs_dir }}/{{ ssl_domain }}.{{ item }}'
+    owner: root
+    group: root
+    mode: '0600'
+  with_items:
+    - crt
+    - ca-bundle
+    - key

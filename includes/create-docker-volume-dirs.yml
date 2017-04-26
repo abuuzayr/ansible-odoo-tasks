@@ -1,0 +1,11 @@
+---
+
+- name: 'create directory for docker service: {{ docker_services }}'
+  become: true
+  file:
+    path: '/{{ docker_volumes_dir }}/{{ item.name }}{% if item.profile is defined and item.profile %}.{{ item.profile }}{% endif %}/host'
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+  with_items: '{{ docker_services }}'

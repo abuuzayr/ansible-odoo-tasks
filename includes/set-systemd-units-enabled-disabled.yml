@@ -1,0 +1,8 @@
+---
+
+- include: 'tasks/includes/set-systemd-unit-enabled-disabled.yml'
+  become: true
+  vars:
+    unit: '{{ item.unit }}'
+    enabled: '{{ item.enabled }}'
+  with_items: '{{ units_enabled_disabled }}'
